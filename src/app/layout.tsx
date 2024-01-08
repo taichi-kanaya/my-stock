@@ -2,9 +2,11 @@ import type { Metadata } from 'next'
 import { ReactNode } from 'react'
 import '@/app/globals.css'
 import { ApolloWrapper } from "@/lib/apollo-provider";
+import Header from "@/components/common/header";
+import Footer from "@/components/common/footer";
 
 export const metadata: Metadata = {
-  title: 'My Stocks App',
+  title: 'My Stocks',
 }
 
 export default function RootLayout({
@@ -15,7 +17,9 @@ export default function RootLayout({
   return (
     <html lang="ja">
       <body>
+        <Header />
         <ApolloWrapper>{children}</ApolloWrapper>
+        <Footer />
       </body>
     </html>
   )
