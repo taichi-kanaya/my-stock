@@ -1,6 +1,6 @@
 import type { Metadata } from 'next'
 import { ReactNode } from 'react'
-import '@/app/globals.css'
+import '@/app/tailwind.css'
 import { ApolloWrapper } from "@/lib/apollo-provider";
 import Header from "@/components/common/header";
 import Footer from "@/components/common/footer";
