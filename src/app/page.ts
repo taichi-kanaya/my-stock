@@ -2,7 +2,7 @@ import { redirect } from "next/navigation";
 
 // トップページは一覧ページにする
 const page = () => {
-    redirect(`/stocks`);
+  redirect(`/stocks`);
 };
 
 export default page;
