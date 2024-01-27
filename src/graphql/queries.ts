@@ -1,20 +1,26 @@
-import { gql } from '@apollo/client';
+import { gql } from "@apollo/client";
 
-export const ALL_ARTICLES_QUERY = gql`
-  query {
-    allArticles {
-      id
-      title
+export const ARTICLE_QUERIES = {
+  ALL_ARTICLES: gql`
+    query {
+      allArticles {
+        id
+        title
+        body
+        public_at
+        views
+      }
     }
-  }
-`;
-
-export const SINGLE_ARTICLE_QUERY = gql`
-  query SingleArticle($id: ID!) {
-    article(id: $id) {
-      id
-      title
-      content
+  `,
+  SINGLE_ARTICLE: gql`
+    query SingleArticle($id: ID!) {
+      Article(id: $id) {
+        id
+        title
+        body
+        public_at
+        views
+      }
     }
-  }
-`;
+  `,
+};

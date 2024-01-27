@@ -1,5 +1,6 @@
 // Article.tsx
-import React from 'react';
+import React from "react";
+import Link from "next/link";
 
 interface ArticleProps {
   article: Article;
@@ -7,14 +8,14 @@ interface ArticleProps {
 
 const Card: React.FC<ArticleProps> = ({ article }) => {
   return (
-    <div className="max-w-sm rounded overflow-hidden shadow-lg m-4">
-      <div className="px-6 py-4">
-        <div className="font-bold text-xl mb-2">{article.title}</div>
-        <p className="text-gray-700 text-base">
-          ID: {article.id}
-        </p>
+    <Link href={`/stocks/${article.id}`}>
+      <div className="rounded-lg border bg-white p-4">
+        <div className="px-1 py-4">
+          <div className="mb-2 text-xl font-bold">{article.title}</div>
+          <p className="text-base text-gray-700">ID: {article.id}</p>
+        </div>
       </div>
-    </div>
+    </Link>
   );
 };
 

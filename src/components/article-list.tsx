@@ -1,29 +1,30 @@
-'use client';
-import { useQuery } from '@apollo/client';
-import Card from './article-card';
-import { Article } from '../../types/article';
-import { ALL_ARTICLES_QUERY } from '../graphql/queries'; 
+"use client";
+import { useQuery } from "@apollo/client";
+import { Article } from "@/types/article";
+import { ARTICLE_QUERIES } from "@/graphql/queries";
+import Loading from "@/app/loading";
+import Custom500 from "@/app/errors/500";
+import Card from "@/components/article-card";
 
 const ArticleList: React.FC = () => {
-  const {loading, error, data, refetch } = useQuery(ALL_ARTICLES_QUERY);
-  if (loading) return <p>Loading...</p>;
+  const { loading, error, data } = useQuery(ARTICLE_QUERIES.ALL_ARTICLES);
+  if (loading) return <Loading />;
   if (error) {
     console.error(error);
-    return <p>Error :(</p>;
+    return <Custom500 />;
   }
 
-  const handleReload = () => {
-    refetch();
-  };
-
   return (
-    <div className="grid grid-cols-3 gap-4">
-      <button onClick={handleReload}>Reload</button>
-      {data.allArticles.map((article: Article) => (
-        <Card key={article.id} article={article} />
-      ))}
+    <div className="flex items-center justify-center bg-gradient-to-bl from-blue-50 to-violet-50">
+      <div className="container mx-auto p-4">
+        <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-4 xl:grid-cols-4">
+          {data.allArticles.map((article: Article) => (
+            <Card key={article.id} article={article} />
+          ))}
+        </div>
+      </div>
     </div>
   );
-}
+};
 
 export default ArticleList;

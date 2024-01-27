@@ -1,514 +1,74 @@
 {
-    "articles": [
-        {
-            "id": 1,
-            "title": "test-article-1",
-            "views": 63
-        },
-        {
-            "id": 2,
-            "title": "test-article-2",
-            "views": 28
-        },
-        {
-            "id": 3,
-            "title": "test-article-3",
-            "views": 37
-        },
-        {
-            "id": 4,
-            "title": "test-article-4",
-            "views": 64
-        },
-        {
-            "id": 5,
-            "title": "test-article-5",
-            "views": 62
-        },
-        {
-            "id": 6,
-            "title": "test-article-6",
-            "views": 83
-        },
-        {
-            "id": 7,
-            "title": "test-article-7",
-            "views": 71
-        },
-        {
-            "id": 8,
-            "title": "test-article-8",
-            "views": 61
-        },
-        {
-            "id": 9,
-            "title": "test-article-9",
-            "views": 19
-        },
-        {
-            "id": 10,
-            "title": "test-article-10",
-            "views": 56
-        },
-        {
-            "id": 11,
-            "title": "test-article-11",
-            "views": 91
-        },
-        {
-            "id": 12,
-            "title": "test-article-12",
-            "views": 88
-        },
-        {
-            "id": 13,
-            "title": "test-article-13",
-            "views": 36
-        },
-        {
-            "id": 14,
-            "title": "test-article-14",
-            "views": 30
-        },
-        {
-            "id": 15,
-            "title": "test-article-15",
-            "views": 92
-        },
-        {
-            "id": 16,
-            "title": "test-article-16",
-            "views": 50
-        },
-        {
-            "id": 17,
-            "title": "test-article-17",
-            "views": 15
-        },
-        {
-            "id": 18,
-            "title": "test-article-18",
-            "views": 53
-        },
-        {
-            "id": 19,
-            "title": "test-article-19",
-            "views": 8
-        },
-        {
-            "id": 20,
-            "title": "test-article-20",
-            "views": 62
-        },
-        {
-            "id": 21,
-            "title": "test-article-21",
-            "views": 8
-        },
-        {
-            "id": 22,
-            "title": "test-article-22",
-            "views": 27
-        },
-        {
-            "id": 23,
-            "title": "test-article-23",
-            "views": 59
-        },
-        {
-            "id": 24,
-            "title": "test-article-24",
-            "views": 17
-        },
-        {
-            "id": 25,
-            "title": "test-article-25",
-            "views": 43
-        },
-        {
-            "id": 26,
-            "title": "test-article-26",
-            "views": 21
-        },
-        {
-            "id": 27,
-            "title": "test-article-27",
-            "views": 6
-        },
-        {
-            "id": 28,
-            "title": "test-article-28",
-            "views": 32
-        },
-        {
-            "id": 29,
-            "title": "test-article-29",
-            "views": 96
-        },
-        {
-            "id": 30,
-            "title": "test-article-30",
-            "views": 47
-        },
-        {
-            "id": 31,
-            "title": "test-article-31",
-            "views": 18
-        },
-        {
-            "id": 32,
-            "title": "test-article-32",
-            "views": 37
-        },
-        {
-            "id": 33,
-            "title": "test-article-33",
-            "views": 53
-        },
-        {
-            "id": 34,
-            "title": "test-article-34",
-            "views": 92
-        },
-        {
-            "id": 35,
-            "title": "test-article-35",
-            "views": 96
-        },
-        {
-            "id": 36,
-            "title": "test-article-36",
-            "views": 64
-        },
-        {
-            "id": 37,
-            "title": "test-article-37",
-            "views": 91
-        },
-        {
-            "id": 38,
-            "title": "test-article-38",
-            "views": 16
-        },
-        {
-            "id": 39,
-            "title": "test-article-39",
-            "views": 10
-        },
-        {
-            "id": 40,
-            "title": "test-article-40",
-            "views": 64
-        },
-        {
-            "id": 41,
-            "title": "test-article-41",
-            "views": 35
-        },
-        {
-            "id": 42,
-            "title": "test-article-42",
-            "views": 69
-        },
-        {
-            "id": 43,
-            "title": "test-article-43",
-            "views": 78
-        },
-        {
-            "id": 44,
-            "title": "test-article-44",
-            "views": 14
-        },
-        {
-            "id": 45,
-            "title": "test-article-45",
-            "views": 34
-        },
-        {
-            "id": 46,
-            "title": "test-article-46",
-            "views": 17
-        },
-        {
-            "id": 47,
-            "title": "test-article-47",
-            "views": 49
-        },
-        {
-            "id": 48,
-            "title": "test-article-48",
-            "views": 31
-        },
-        {
-            "id": 49,
-            "title": "test-article-49",
-            "views": 89
-        },
-        {
-            "id": 50,
-            "title": "test-article-50",
-            "views": 66
-        },
-        {
-            "id": 51,
-            "title": "test-article-51",
-            "views": 60
-        },
-        {
-            "id": 52,
-            "title": "test-article-52",
-            "views": 26
-        },
-        {
-            "id": 53,
-            "title": "test-article-53",
-            "views": 33
-        },
-        {
-            "id": 54,
-            "title": "test-article-54",
-            "views": 51
-        },
-        {
-            "id": 55,
-            "title": "test-article-55",
-            "views": 9
-        },
-        {
-            "id": 56,
-            "title": "test-article-56",
-            "views": 56
-        },
-        {
-            "id": 57,
-            "title": "test-article-57",
-            "views": 44
-        },
-        {
-            "id": 58,
-            "title": "test-article-58",
-            "views": 6
-        },
-        {
-            "id": 59,
-            "title": "test-article-59",
-            "views": 17
-        },
-        {
-            "id": 60,
-            "title": "test-article-60",
-            "views": 78
-        },
-        {
-            "id": 61,
-            "title": "test-article-61",
-            "views": 84
-        },
-        {
-            "id": 62,
-            "title": "test-article-62",
-            "views": 73
-        },
-        {
-            "id": 63,
-            "title": "test-article-63",
-            "views": 25
-        },
-        {
-            "id": 64,
-            "title": "test-article-64",
-            "views": 60
-        },
-        {
-            "id": 65,
-            "title": "test-article-65",
-            "views": 67
-        },
-        {
-            "id": 66,
-            "title": "test-article-66",
-            "views": 30
-        },
-        {
-            "id": 67,
-            "title": "test-article-67",
-            "views": 16
-        },
-        {
-            "id": 68,
-            "title": "test-article-68",
-            "views": 51
-        },
-        {
-            "id": 69,
-            "title": "test-article-69",
-            "views": 27
-        },
-        {
-            "id": 70,
-            "title": "test-article-70",
-            "views": 45
-        },
-        {
-            "id": 71,
-            "title": "test-article-71",
-            "views": 83
-        },
-        {
-            "id": 72,
-            "title": "test-article-72",
-            "views": 86
-        },
-        {
-            "id": 73,
-            "title": "test-article-73",
-            "views": 33
-        },
-        {
-            "id": 74,
-            "title": "test-article-74",
-            "views": 97
-        },
-        {
-            "id": 75,
-            "title": "test-article-75",
-            "views": 6
-        },
-        {
-            "id": 76,
-            "title": "test-article-76",
-            "views": 90
-        },
-        {
-            "id": 77,
-            "title": "test-article-77",
-            "views": 45
-        },
-        {
-            "id": 78,
-            "title": "test-article-78",
-            "views": 89
-        },
-        {
-            "id": 79,
-            "title": "test-article-79",
-            "views": 95
-        },
-        {
-            "id": 80,
-            "title": "test-article-80",
-            "views": 59
-        },
-        {
-            "id": 81,
-            "title": "test-article-81",
-            "views": 19
-        },
-        {
-            "id": 82,
-            "title": "test-article-82",
-            "views": 78
-        },
-        {
-            "id": 83,
-            "title": "test-article-83",
-            "views": 64
-        },
-        {
-            "id": 84,
-            "title": "test-article-84",
-            "views": 43
-        },
-        {
-            "id": 85,
-            "title": "test-article-85",
-            "views": 0
-        },
-        {
-            "id": 86,
-            "title": "test-article-86",
-            "views": 76
-        },
-        {
-            "id": 87,
-            "title": "test-article-87",
-            "views": 23
-        },
-        {
-            "id": 88,
-            "title": "test-article-88",
-            "views": 62
-        },
-        {
-            "id": 89,
-            "title": "test-article-89",
-            "views": 38
-        },
-        {
-            "id": 90,
-            "title": "test-article-90",
-            "views": 57
-        },
-        {
-            "id": 91,
-            "title": "test-article-91",
-            "views": 38
-        },
-        {
-            "id": 92,
-            "title": "test-article-92",
-            "views": 69
-        },
-        {
-            "id": 93,
-            "title": "test-article-93",
-            "views": 85
-        },
-        {
-            "id": 94,
-            "title": "test-article-94",
-            "views": 65
-        },
-        {
-            "id": 95,
-            "title": "test-article-95",
-            "views": 41
-        },
-        {
-            "id": 96,
-            "title": "test-article-96",
-            "views": 12
-        },
-        {
-            "id": 97,
-            "title": "test-article-97",
-            "views": 5
-        },
-        {
-            "id": 98,
-            "title": "test-article-98",
-            "views": 42
-        },
-        {
-            "id": 99,
-            "title": "test-article-99",
-            "views": 51
-        },
-        {
-            "id": 100,
-            "title": "test-article-100",
-            "views": 79
-        }
-    ],
-    "users": [
-        {
-            "id": 1,
-            "name": "Taichi Kanaya"
-        },
-        {
-            "id": 2,
-            "name": "Tarou Yamada"
-        }
-    ]
+  "articles": [
+    {
+      "id": 1,
+      "title": "サンプル記事1",
+      "body": "これはサンプル記事1の本文です。",
+      "public_at": "2023-12-01",
+      "views": 100
+    },
+    {
+      "id": 2,
+      "title": "サンプル記事2",
+      "body": "これはサンプル記事2の本文です。",
+      "public_at": "2023-11-15",
+      "views": 85
+    },
+    {
+      "id": 3,
+      "title": "サンプル記事3",
+      "body": "これはサンプル記事3の本文です。",
+      "public_at": "2023-10-20",
+      "views": 120
+    },
+    {
+      "id": 4,
+      "title": "サンプル記事4",
+      "body": "これはサンプル記事4の本文です。",
+      "public_at": "2023-09-05",
+      "views": 75
+    },
+    {
+      "id": 5,
+      "title": "サンプル記事5",
+      "body": "これはサンプル記事5の本文です。",
+      "public_at": "2023-08-15",
+      "views": 105
+    },
+    {
+      "id": 6,
+      "title": "サンプル記事6",
+      "body": "これはサンプル記事6の本文です。",
+      "public_at": "2023-07-10",
+      "views": 90
+    },
+    {
+      "id": 7,
+      "title": "サンプル記事7",
+      "body": "これはサンプル記事7の本文です。",
+      "public_at": "2023-06-22",
+      "views": 110
+    },
+    {
+      "id": 8,
+      "title": "サンプル記事8",
+      "body": "これはサンプル記事8の本文です。",
+      "public_at": "2023-05-09",
+      "views": 70
+    },
+    {
+      "id": 9,
+      "title": "サンプル記事9",
+      "body": "これはサンプル記事9の本文です。",
+      "public_at": "2023-04-14",
+      "views": 115
+    },
+    {
+      "id": 10,
+      "title": "サンプル記事10",
+      "body": "これはサンプル記事10の本文です。",
+      "public_at": "2023-03-28",
+      "views": 80
+    }
+  ]
 }
