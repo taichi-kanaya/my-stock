@@ -3,7 +3,6 @@ import { useQuery } from "@apollo/client";
 import { Article } from "@/types/article";
 import { ARTICLE_QUERIES } from "@/graphql/queries";
 import Loading from "@/app/loading";
-import Custom500 from "@/app/errors/500";
 import Card from "@/components/article-card";
 
 const ArticleList: React.FC = () => {
@@ -11,7 +10,7 @@ const ArticleList: React.FC = () => {
   if (loading) return <Loading />;
   if (error) {
     console.error(error);
-    return <Custom500 />;
+    throw new Error("Failed to retrieve the article.");
   }
 
   return (

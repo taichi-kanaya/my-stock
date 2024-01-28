@@ -2,7 +2,6 @@
 import { useQuery } from "@apollo/client";
 import { ARTICLE_QUERIES } from "@/graphql/queries";
 import Loading from "@/app/loading";
-import Custom500 from "@/app/errors/500";
 import Link from "next/link";
 
 export default function Page({ params }: { params: { id: string } }) {
@@ -12,7 +11,7 @@ export default function Page({ params }: { params: { id: string } }) {
   if (loading) return <Loading />;
   if (error) {
     console.error(error);
-    return <Custom500 />;
+    throw new Error("Failed to retrieve the article.");
   }
 
   return (

@@ -1,12 +1,22 @@
+"use client";
+
+import { useEffect } from "react";
 import Link from "next/link";
 
-export default function Custom503() {
+export default function Error({
+  error,
+}: {
+  error: Error & { digest?: string };
+}) {
+  useEffect(() => {
+    console.error(error);
+  }, [error]);
+
   return (
     <div className="m-10 text-center">
       <h1>
-        ただいまサーバが大変混み合っています。
-        <br />
-        恐れ入りますが、時間をおいてから再度アクセスをお願いいたします。
+        予期しないエラーが発生しました。 <br />
+        恐れ入りますが、再度操作をお願いいたします。
       </h1>
       <div className="my-5">
         <Link
