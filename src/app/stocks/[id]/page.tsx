@@ -1,12 +1,13 @@
-"use client";
-import { useQuery } from "@apollo/client";
+import { contentfulClient } from "@/lib/apollo-client";
 import { ARTICLE_QUERIES } from "@/graphql/queries";
 import Loading from "@/app/loading";
 import Link from "next/link";
+import { format } from "date-fns";
 
-export default function Page({ params }: { params: { id: string } }) {
-  const { loading, error, data } = useQuery(ARTICLE_QUERIES.SINGLE_ARTICLE, {
-    variables: { id: params.id },
+export default async function Page({ params }: { params: { id: string } }) {
+  const { loading, error, data } = await contentfulClient.query({
+    query: ARTICLE_QUERIES.SINGLE_ARTICLE,
+    variables: { id: parseInt(params.id) },
   });
   if (loading) return <Loading />;
   if (error) {
@@ -14,19 +15,28 @@ export default function Page({ params }: { params: { id: string } }) {
     throw new Error("Failed to retrieve the article.");
   }
 
+  // 記事を取得
+  const article = data.stockCollection.items[0];
+
+  // 公開日をフォーマット
+  const formattedDate = format(new Date(article.publicAt), "yyyy/MM/dd");
+
+  // 記事本文を取得
+  const articleBody = article.body.json.content[0].content[0].value;
+
   return (
     <>
       <div className="container mx-auto mt-5 px-4">
         <div className="grid grid-cols-1 gap-4">
           <h1 className="border-b-2 border-t-2 border-blue-800 py-2 text-2xl text-blue-800">
-            {data.Article.title}
+            {article.title}
           </h1>
-          <p>公開日: {data.Article.public_at}</p>
+          <p>公開日: {formattedDate}</p>
           <div className="mt-2">
-            <p>{data.Article.body}</p>
+            <p>{articleBody}</p>
           </div>
           <div className="mt-2 text-sm">
-            <p>この記事は {data.Article.views} 名の方に閲覧されています</p>
+            <p>この記事は {article.views} 名の方に閲覧されています</p>
           </div>
         </div>
       </div>

@@ -1,12 +1,36 @@
-import { ApolloClient, HttpLink, InMemoryCache } from "@apollo/client";
-import { registerApolloClient } from "@apollo/experimental-nextjs-app-support/rsc";
+import {
+  ApolloClient,
+  InMemoryCache,
+  HttpLink,
+  ApolloLink,
+} from "@apollo/client";
+import { print } from "graphql/language/printer";
 
-// React Server Components として利用する Apollo Client を作成する
-export const { getClient } = registerApolloClient(() => {
-  return new ApolloClient({
-    cache: new InMemoryCache(),
-    link: new HttpLink({
-      uri: "http://localhost:4000",
-    }),
+// GraphQLリクエストとレスポンスをコンソール出力するためのリンク
+const consoleLogLink = new ApolloLink((operation, forward) => {
+  console.log(
+    `GraphQL Request: ${print(operation.query)}`,
+    `Variables: ${JSON.stringify(operation.variables)}`,
+  );
+  return forward(operation).map((response) => {
+    console.log(
+      `GraphQL Response: ${operation.operationName}`,
+      JSON.stringify(response.data),
+    );
+    return response;
   });
+});
+
+// GraphQL APIを使用するためのリンク
+const httpLink = new HttpLink({
+  uri: `https://graphql.contentful.com/content/v1/spaces/${process.env.CONTENTFUL_SPACE}/environments/${process.env.CONTENTFUL_ENV}`,
+  headers: {
+    Authorization: `Bearer ${process.env.CDA_ACCESS_TOKEN}`,
+  },
+});
+
+// Contentful の GraphQL Content API アクセス用クライアント
+export const contentfulClient = new ApolloClient({
+  cache: new InMemoryCache(),
+  link: ApolloLink.from([consoleLogLink, httpLink]),
 });

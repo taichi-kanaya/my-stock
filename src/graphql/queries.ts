@@ -2,24 +2,32 @@ import { gql } from "@apollo/client";
 
 export const ARTICLE_QUERIES = {
   ALL_ARTICLES: gql`
-    query {
-      allArticles {
-        id
-        title
-        body
-        public_at
-        views
+    query GetAllArticles {
+      stockCollection(order: id_ASC) {
+        items {
+          id
+          title
+          body {
+            json
+          }
+          publicAt
+          views
+        }
       }
     }
   `,
   SINGLE_ARTICLE: gql`
-    query SingleArticle($id: ID!) {
-      Article(id: $id) {
-        id
-        title
-        body
-        public_at
-        views
+    query GetSingleArticle($id: Int!) {
+      stockCollection(where: { id: $id }) {
+        items {
+          id
+          title
+          body {
+            json
+          }
+          publicAt
+          views
+        }
       }
     }
   `,
