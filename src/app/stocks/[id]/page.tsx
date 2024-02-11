@@ -1,5 +1,5 @@
-import { contentfulClient } from "@/lib/apollo-client";
-import { ARTICLE_QUERIES } from "@/graphql/queries";
+import { contentfulClient } from "@/lib/apollo-client.server";
+import { ARTICLE_QUERIES } from "@/graphql/queries.server";
 import Loading from "@/app/loading";
 import Link from "next/link";
 import { format } from "date-fns";
