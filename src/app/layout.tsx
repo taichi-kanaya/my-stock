@@ -13,7 +13,9 @@ export default function RootLayout({ children }: { children: ReactNode }) {
     <html lang="ja">
       <body>
         <Header />
-        <main>{children}</main>
+        <main>
+          <div className="container mx-auto p-4">{children}</div>
+        </main>
         <Footer />
       </body>
     </html>

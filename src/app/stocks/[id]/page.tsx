@@ -26,7 +26,19 @@ export default async function Page({ params }: { params: { id: string } }) {
 
   return (
     <>
-      <div className="container mx-auto mt-5 px-4">
+      <div className="container mx-auto mt-4 px-4">
+        <div className="space-x-4 pb-4">
+          <Link href={`/stocks/edit/${params.id}`}>
+            <button className="rounded bg-blue-500 px-4 py-2 font-bold text-white hover:bg-blue-700">
+              編集する
+            </button>
+          </Link>
+          <Link href={`/stocks/delete/${params.id}`}>
+            <button className="rounded bg-red-500 px-4 py-2 font-bold text-white hover:bg-red-700">
+              削除する
+            </button>
+          </Link>
+        </div>
         <div className="grid grid-cols-1 gap-4">
           <h1 className="border-b-2 border-t-2 border-blue-800 py-2 text-2xl text-blue-800">
             {article.title}
