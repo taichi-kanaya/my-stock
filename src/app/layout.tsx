@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { ReactNode } from "react";
-import "@/app/tailwind.css";
+import "@/css/tailwind.css";
+import "@/css/global.css";
 import Header from "@/components/common/header.server";
 import Footer from "@/components/common/footer.server";
 
