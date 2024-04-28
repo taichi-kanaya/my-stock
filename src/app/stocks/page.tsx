@@ -1,9 +1,9 @@
-import { contentfulClient } from "@/lib/apollo-client.server";
-import { Article } from "@/types/article.server";
-import { ARTICLE_QUERIES } from "@/graphql/queries.server";
+import { contentfulClient } from "@/app/lib/apollo-client.server";
+import { Article } from "@/app/types/article.server";
+import { ARTICLE_QUERIES } from "@/app/lib/graphql/queries.server";
 import Loading from "@/app/loading";
 import Link from "next/link";
-import Card from "@/components/stocks/article-card.server";
+import Card from "@/app/components/stocks/article-card.server";
 
 export default async function Page() {
   const { loading, error, data } = await contentfulClient.query({

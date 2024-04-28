@@ -1,100 +1,50 @@
 "use client";
 import Link from "next/link";
-import { useState } from "react";
-import DatePickerWithLocale from "@/components/common/datepicker-with-locale";
-import { isValidDate } from "@/utils/date";
+import DatePickerWithLocale from "@/app/components/common/datepicker-with-locale";
+import yup, { object, string, date } from "yup";
+import { yupResolver } from "@hookform/resolvers/yup";
+import { useForm, SubmitHandler, Controller } from "react-hook-form";
+import { isValid } from "date-fns";
+import { registContents } from "@/app/features/stocks/actions/regist-contents";
+import { ValidationMessages } from "@/app/constants/validation";
 
-// フォーム定義
-interface FormData {
-  id: string;
-  title: string;
-  body: string;
-  public_at: Date | null;
-  views: string;
-}
+const schema = object().shape({
+  id: string()
+    .required(ValidationMessages.REQUIRED)
+    .max(11, ValidationMessages.MAX_LENGTH_NUM(11)),
+  title: string()
+    .required(ValidationMessages.REQUIRED)
+    .max(255, ValidationMessages.MAX_LENGTH_TEXT(255)),
+  body: string()
+    .required(ValidationMessages.REQUIRED)
+    .max(1000, ValidationMessages.MAX_LENGTH_TEXT(1000)),
+  public_at: date()
+    .required(ValidationMessages.REQUIRED)
+    .test("isValidDate", ValidationMessages.INVALID_DATE, (value) => {
+      return isValid(value);
+    }),
+  views: string()
+    .required(ValidationMessages.REQUIRED)
+    .max(11, ValidationMessages.MAX_LENGTH_NUM(11)),
+});
+type FormData = yup.InferType<typeof schema>;
 
-// バリデーションエラー表示項目定義
-interface FormErrors {
-  id?: string;
-  title?: string;
-  body?: string;
-  public_at?: string;
-  views?: string;
-  [key: string]: string | undefined;
-}
-
-export default function DetailedForm() {
-  const [formData, setFormData] = useState<FormData>({
-    id: "",
-    title: "",
-    body: "",
-    public_at: null,
-    views: "",
-  });
-  const [errors, setErrors] = useState<FormErrors>({});
-
-  // バリデーションチェック
-  const validate = (): boolean => {
-    let tempErrors: FormErrors = {};
-    tempErrors.id =
-      formData.id && /^\d{1,11}$/.test(formData.id)
-        ? ""
-        : "11桁までの数値を入力してください";
-    tempErrors.title =
-      formData.title && formData.title.length <= 255
-        ? ""
-        : "255文字までの文字列を入力してください";
-    tempErrors.body =
-      formData.body && formData.body.length <= 1000
-        ? ""
-        : "1000文字までの文字列を入力してください";
-
-    console.log(formData.public_at);
-    tempErrors.public_at =
-      formData.public_at && isValidDate(formData.public_at.toISOString())
-        ? ""
-        : "日付を正しく入力してください";
-    tempErrors.views =
-      formData.views && /^\d{1,11}$/.test(formData.views)
-        ? ""
-        : "11桁までの数値を入力してください";
-    setErrors(tempErrors);
-
-    return Object.keys(tempErrors).every((key) => tempErrors[key] === "");
-  };
-
-  // 日付以外の入力値変更時ハンドラ
-  const handleChange = (
-    event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>,
-  ): void => {
-    const { name, value } = event.target;
-    setFormData({ ...formData, [name]: value });
-  };
-
-  // 日付入力値変更時ハンドラ
-  const handleChangeDate = (date: Date | null): void => {
-    setFormData({ ...formData, public_at: date });
-  };
-
-  // 登録ボタン押下時ハンドラ
-  const handleSubmit = async (
-    event: React.FormEvent<HTMLFormElement>,
-  ): Promise<void> => {
-    event.preventDefault();
-    if (validate()) {
-      console.log("Valid Form Data:", formData);
-    } else {
-      console.log("Validation Error:", errors);
-    }
-  };
-
-  // 入力フォームスタイル
+export default function Form() {
   const formStyle =
     "focus:shadow-outline border border-gray-300 bg-white p-2 leading-tight text-gray-700 focus:outline-none";
 
+  const { control, register, handleSubmit, formState } = useForm<FormData>({
+    resolver: yupResolver(schema),
+    mode: "onBlur",
+  });
+
+  const onSubmit: SubmitHandler<FormData> = async (data: FormData) => {
+    await registContents(data);
+  };
+
   return (
     <div>
-      <form onSubmit={handleSubmit} className="space-y-4 p-4">
+      <form className="space-y-4 p-4" onSubmit={handleSubmit(onSubmit)}>
         <div className="flex flex-col">
           <label
             htmlFor="id"
@@ -102,16 +52,8 @@ export default function DetailedForm() {
           >
             ID <span className="text-red-500">*</span>
           </label>
-          <input
-            type="text"
-            id="id"
-            name="id"
-            value={formData.id}
-            onChange={handleChange}
-            className={formStyle}
-            maxLength={11}
-          />
-          {errors.id && <p className="text-red-500">{errors.id}</p>}
+          <input className={formStyle} maxLength={11} {...register("id")} />
+          <span className="text-red-500">{formState.errors.id?.message}</span>
         </div>
         <div className="flex flex-col">
           <label
@@ -120,16 +62,10 @@ export default function DetailedForm() {
           >
             タイトル <span className="text-red-500">*</span>
           </label>
-          <input
-            type="text"
-            id="title"
-            name="title"
-            value={formData.title}
-            onChange={handleChange}
-            className={formStyle}
-            maxLength={255}
-          />
-          {errors.title && <p className="text-red-500">{errors.title}</p>}
+          <input className={formStyle} maxLength={255} {...register("title")} />
+          <span className="text-red-500">
+            {formState.errors.title?.message}
+          </span>
         </div>
         <div className="flex flex-col">
           <label
@@ -138,33 +74,33 @@ export default function DetailedForm() {
           >
             本文 <span className="text-red-500">*</span>
           </label>
-          <textarea
-            id="body"
-            name="body"
-            value={formData.body}
-            onChange={handleChange}
-            rows={10}
-            className={formStyle}
-            maxLength={1000}
-          />
-          {errors.body && <p className="text-red-500">{errors.body}</p>}
+          <textarea className={formStyle} {...register("body")} />
+          <span className="text-red-500">{formState.errors.body?.message}</span>
         </div>
-        <div className="flex flex-col">
+        <div className="flex max-w-[200px] flex-col">
           <label
             htmlFor="public_at"
             className="mb-2 text-sm font-medium text-gray-700"
           >
             公開日 <span className="text-red-500">*</span>
           </label>
-          <DatePickerWithLocale
-            selected={formData.public_at}
-            onChange={handleChangeDate}
-            dateFormat="yyyy年MM月dd日"
-            className={formStyle}
+          <Controller
+            name="public_at"
+            control={control}
+            render={({ field }) => (
+              <DatePickerWithLocale
+                selected={field.value}
+                onChange={field.onChange}
+                onBlur={field.onBlur}
+                dateFormat="yyyy年MM月dd日"
+                className={formStyle}
+                popperPlacement="bottom-start"
+              />
+            )}
           />
-          {errors.public_at && (
-            <p className="text-red-500">{errors.public_at}</p>
-          )}
+          <span className="text-red-500">
+            {formState.errors.public_at?.message}
+          </span>
         </div>
         <div className="flex flex-col">
           <label
@@ -173,17 +109,10 @@ export default function DetailedForm() {
           >
             閲覧数 <span className="text-red-500">*</span>
           </label>
-          <input
-            type="number"
-            id="views"
-            name="views"
-            value={formData.views}
-            onChange={handleChange}
-            className={formStyle}
-            min={0}
-            max={999999999}
-          />
-          {errors.views && <p className="text-red-500">{errors.views}</p>}
+          <input className={formStyle} maxLength={11} {...register("views")} />
+          <span className="text-red-500">
+            {formState.errors.views?.message}
+          </span>
         </div>
         <div className="space-x-4">
           <button

@@ -1,18 +1,20 @@
-import { contentfulClient } from "@/lib/apollo-client.server";
-import { ARTICLE_QUERIES } from "@/graphql/queries.server";
 import Loading from "@/app/loading";
 import Link from "next/link";
 import { format } from "date-fns";
+import getArticle from "@/app/lib/stocks/get-article.server";
+import { notFound } from "next/navigation";
 
 export default async function Page({ params }: { params: { id: string } }) {
-  const { loading, error, data } = await contentfulClient.query({
-    query: ARTICLE_QUERIES.SINGLE_ARTICLE,
-    variables: { id: parseInt(params.id) },
-  });
+  const { loading, error, data } = await getArticle(parseInt(params.id));
   if (loading) return <Loading />;
   if (error) {
     console.error(error);
     throw new Error("Failed to retrieve the article.");
+  }
+
+  // 記事が見つからない場合は404エラーを返す
+  if (data.stockCollection.items.length === 0) {
+    notFound();
   }
 
   // 記事を取得

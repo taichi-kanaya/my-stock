@@ -1,6 +1,6 @@
 import React from "react";
 import Link from "next/link";
-import { Article } from "@/types/article.server";
+import { Article } from "@/app/types/article.server";
 
 interface ArticleProps {
   article: Article;
