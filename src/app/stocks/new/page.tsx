@@ -4,10 +4,13 @@ import DatePickerWithLocale from "@/app/components/common/datepicker-with-locale
 import yup, { object, string, date } from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { useForm, SubmitHandler, Controller } from "react-hook-form";
-import { isValid } from "date-fns";
+import { format, isValid } from "date-fns";
 import { registContents } from "@/app/features/stocks/actions/regist-contents";
 import { ValidationMessages } from "@/app/constants/validation";
+import { RegistFormData } from "@/app/features/stocks/types";
+import { useState } from "react";
 
+// バリデーションルールの定義
 const schema = object().shape({
   id: string()
     .required(ValidationMessages.REQUIRED)
@@ -38,13 +41,42 @@ export default function Form() {
     mode: "onBlur",
   });
 
+  const [isSuccess, setIsSuccess] = useState(false);
+  const [message, setMessage] = useState("");
   const onSubmit: SubmitHandler<FormData> = async (data: FormData) => {
-    await registContents(data);
+    setMessage("");
+    // 公開日を文字列にフォーマットしてServer Actionsへ渡す
+    const modifiedData: RegistFormData = {
+      ...data,
+      public_at: format(data.public_at, "yyyyMMdd"),
+    };
+    const isSuccess = await registContents(modifiedData);
+    setIsSuccess(isSuccess);
+    if (isSuccess) {
+      setMessage("記事の登録が完了しました。");
+    } else {
+      setMessage(
+        "記事の登録に失敗しました。恐れ入りますが、時間を空けてもう１度お試しください。",
+      );
+    }
   };
 
   return (
     <div>
       <form className="space-y-4 p-4" onSubmit={handleSubmit(onSubmit)}>
+        {message != "" ? (
+          isSuccess ? (
+            <div className="rounded border border-blue-500 bg-blue-100 px-4 py-3 text-blue-700">
+              <p className="text-sm">{message}</p>
+            </div>
+          ) : (
+            <div className="rounded border border-red-400 bg-red-100 px-4 py-3 text-red-700">
+              <span className="block sm:inline">{message}</span>
+            </div>
+          )
+        ) : (
+          ""
+        )}
         <div className="flex flex-col">
           <label
             htmlFor="id"

@@ -13,6 +13,7 @@
     "@hookform/resolvers": "^3.3.4",
     "@types/react-datepicker": "^4.19.6",
     "axios": "^1.6.7",
+    "contentful-management": "^11.25.2",
     "date-fns": "^3.3.1",
     "graphql": "^16.8.1",
     "next": "14.0.4",

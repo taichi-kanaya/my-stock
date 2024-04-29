@@ -23,7 +23,7 @@ const consoleLogLink = new ApolloLink((operation, forward) => {
 
 // GraphQL APIを使用するためのリンク
 const httpLink = new HttpLink({
-  uri: `https://graphql.contentful.com/content/v1/spaces/${process.env.CONTENTFUL_SPACE}/environments/${process.env.CONTENTFUL_ENV}`,
+  uri: `https://graphql.contentful.com/content/v1/spaces/${process.env.CONTENTFUL_SPACE_ID}/environments/${process.env.CONTENTFUL_ENVIRONMENT_ID}`,
   headers: {
     Authorization: `Bearer ${process.env.CDA_ACCESS_TOKEN}`,
   },
