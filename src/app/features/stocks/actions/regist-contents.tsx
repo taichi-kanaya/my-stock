@@ -10,13 +10,13 @@ export async function registContents(data: RegistFormData): Promise<boolean> {
     const client = contentful.createClient({
       accessToken: process.env.CMA_ACCESS_TOKEN!!,
     });
-    const cf_space = await client.getSpace(process.env.CONTENTFUL_SPACE_ID!!);
-    const cf_environment = await cf_space.getEnvironment(
+    const cfSpace = await client.getSpace(process.env.CONTENTFUL_SPACE_ID!!);
+    const cfEnvironment = await cfSpace.getEnvironment(
       process.env.CONTENTFUL_ENVIRONMENT_ID!!,
     );
 
     // Contentfulにコンテンツを登録する
-    const cf_entry = await cf_environment.createEntry(
+    const cfEntry = await cfEnvironment.createEntry(
       process.env.CONTENTFUL_CONTENT_TYPE_ID!!,
       {
         fields: {
@@ -57,9 +57,9 @@ export async function registContents(data: RegistFormData): Promise<boolean> {
     );
 
     // 記事を公開する
-    cf_entry.publish();
+    await cfEntry.publish();
 
-    console.log("Content registered successfully:", cf_entry);
+    console.log("Content registered successfully:", cfEntry);
     return true;
   } catch (error) {
     console.error("Error registering content:", error);
