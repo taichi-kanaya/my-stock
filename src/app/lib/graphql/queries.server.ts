@@ -1,4 +1,4 @@
-import { gql } from "@apollo/client";
+import { gql } from '@apollo/client'
 
 export const ARTICLE_QUERIES = {
   ALL_ARTICLES: gql`
@@ -31,4 +31,4 @@ export const ARTICLE_QUERIES = {
       }
     }
   `,
-};
+}
