@@ -12,6 +12,7 @@ import NotificationMessage from '@/components/basic/NotificationMessage'
 import TextArea from '@/components/basic/TextArea'
 import TextInput from '@/components/basic/TextInput'
 import ValidationErrorMessage from '@/components/basic/ValidationErrorMessage'
+import { ARTICLE_MAX_LENGTHS } from '@/constants/validation'
 import { registerContents } from '@/features/articles/actions/registerContents'
 import { ArticleFormData } from '@/features/articles/types'
 
@@ -46,21 +47,26 @@ const NewForm: React.FC = () => {
           <Label isRequire={true} htmlFor="id">
             ID
           </Label>
-          <TextInput id="id" maxLength={11} {...register('id')} />
+          <TextInput id="id" maxLength={ARTICLE_MAX_LENGTHS.ID} {...register('id')} />
           <ValidationErrorMessage>{formState.errors.id?.message}</ValidationErrorMessage>
         </div>
         <div className="flex flex-col">
           <Label isRequire={true} htmlFor="title">
             タイトル
           </Label>
-          <TextInput id="title" maxLength={255} {...register('title')} />
+          <TextInput id="title" maxLength={ARTICLE_MAX_LENGTHS.TITLE} {...register('title')} />
           <ValidationErrorMessage>{formState.errors.title?.message}</ValidationErrorMessage>
         </div>
         <div className="flex flex-col">
           <Label isRequire={true} htmlFor="body">
             本文
           </Label>
-          <TextArea id="body" rows={10} maxLength={1000} {...register('body')} />
+          <TextArea
+            id="body"
+            rows={10}
+            maxLength={ARTICLE_MAX_LENGTHS.BODY}
+            {...register('body')}
+          />
           <ValidationErrorMessage>{formState.errors.body?.message}</ValidationErrorMessage>
         </div>
         <div className="flex max-w-[200px] flex-col">
@@ -87,7 +93,7 @@ const NewForm: React.FC = () => {
           <Label isRequire={true} htmlFor="views">
             閲覧数
           </Label>
-          <TextInput id="views" maxLength={11} {...register('views')} />
+          <TextInput id="views" maxLength={ARTICLE_MAX_LENGTHS.VIEWS} {...register('views')} />
           <ValidationErrorMessage>{formState.errors.views?.message}</ValidationErrorMessage>
         </div>
         <div className="space-x-4">
