@@ -26,7 +26,7 @@ export const schema = z.object({
     .string()
     .nonempty(MESSAGES.REQUIRED)
     .max(ARTICLE_MAX_LENGTHS.BODY, { message: MESSAGES.MAX_LENGTH_TEXT(ARTICLE_MAX_LENGTHS.BODY) }),
-  public_at: z
+  publicAt: z
     .any() // 一旦 any にして refine で検証
     .refine((value) => isValid(value), {
       message: MESSAGES.INVALID_DATE,

@@ -70,15 +70,15 @@ const NewForm: React.FC = () => {
           <ValidationErrorMessage>{formState.errors.body?.message}</ValidationErrorMessage>
         </div>
         <div className="flex max-w-[200px] flex-col">
-          <Label isRequire={true} htmlFor="public_at">
+          <Label isRequire={true} htmlFor="publicAt">
             公開日
           </Label>
           <Controller
-            name="public_at"
+            name="publicAt"
             control={control}
             render={({ field }) => (
               <DatePickerWithLocale
-                id="public_at"
+                id="publicAt"
                 selected={field.value}
                 onChange={field.onChange}
                 onBlur={field.onBlur}
@@ -87,7 +87,7 @@ const NewForm: React.FC = () => {
               />
             )}
           />
-          <ValidationErrorMessage>{formState.errors.public_at?.message}</ValidationErrorMessage>
+          <ValidationErrorMessage>{formState.errors.publicAt?.message}</ValidationErrorMessage>
         </div>
         <div className="flex flex-col">
           <Label isRequire={true} htmlFor="views">

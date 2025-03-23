@@ -43,7 +43,7 @@ export async function registerContents(data: ArticleFormData): Promise<boolean> 
           },
         },
         public_at: {
-          'ja-JP': data.public_at,
+          'ja-JP': data.publicAt,
         },
         views: {
           'ja-JP': Number(data.views),
