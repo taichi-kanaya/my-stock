@@ -10,6 +10,7 @@ import { ArticleFormData } from '@/features/articles/types'
 
 // バリデーションルールの定義
 export const schema = z.object({
+  entryId: z.string().optional(),
   id: z
     .string()
     .nonempty(MESSAGES.REQUIRED)
