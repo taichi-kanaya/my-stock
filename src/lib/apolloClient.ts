@@ -21,6 +21,9 @@ const httpLink = new HttpLink({
   headers: {
     Authorization: `Bearer ${process.env.CDA_ACCESS_TOKEN}`,
   },
+  fetchOptions: {
+    cache: 'no-store',
+  },
 })
 
 const defaultOptions: DefaultOptions = {
