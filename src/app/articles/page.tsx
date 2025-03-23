@@ -9,7 +9,7 @@ export default async function Page() {
   if (loading) return <Loading />
   if (error) {
     console.error(error)
-    throw new Error('Failed to retrieve the article.')
+    throw new Error('Failed to retrieve articles.')
   }
 
   return (
