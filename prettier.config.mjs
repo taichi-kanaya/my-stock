@@ -1,3 +1,6 @@
+import prettierPluginSortImports from '@ianvs/prettier-plugin-sort-imports'
+
+/** @type {import("prettier").Config} */
 export default {
   // セミコロンなし
   semi: false,
@@ -22,5 +25,15 @@ export default {
   // Markdownの改行を変更しない
   proseWrap: 'preserve',
   // Tailwind CSSのクラス並び替え
-  plugins: ['prettier-plugin-tailwindcss'],
+  plugins: ['prettier-plugin-tailwindcss', prettierPluginSortImports],
+  // import順の制御
+  importOrder: [
+    '^react$', // React系（最優先）
+    '', // 空行を入れる
+    '<THIRD_PARTY_MODULES>', // 外部ライブラリ（npmパッケージ）
+    '', // 空行を入れる
+    '^@/.*', // エイリアス（@/client/componentsなど）
+    '', // 空行を入れる
+    '^[./]', // 相対パス（./や../）
+  ],
 }
