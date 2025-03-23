@@ -54,7 +54,8 @@ export async function registerContents(data: ArticleFormData): Promise<boolean> 
     // 記事を公開する
     await cfEntry.publish()
 
-    console.log('Content registered successfully:', cfEntry)
+    // eslint-disable-next-line no-console
+    console.info('Content registered successfully:', cfEntry)
     return true
   } catch (error) {
     console.error('Error registering content:', error)
