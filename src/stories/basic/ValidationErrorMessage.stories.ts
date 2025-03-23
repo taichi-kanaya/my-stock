@@ -1,6 +1,6 @@
 import type { Meta, StoryObj } from '@storybook/react'
 
-import ValidationErrorMessage from '@/app/components/basic/ValidationErrorMessage'
+import ValidationErrorMessage from '@/components/basic/ValidationErrorMessage'
 
 const meta = {
   title: 'Basic/ValidationErrorMessage',

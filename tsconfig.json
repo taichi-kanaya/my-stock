@@ -3,11 +3,7 @@
     // ブラウザが解釈するECMAScriptのバージョン
     "target": "es2020",
     // TypeScriptが利用するライブラリを指定
-    "lib": [
-      "dom",
-      "dom.iterable",
-      "esnext"
-    ],
+    "lib": ["dom", "dom.iterable", "esnext"],
     // JSファイルもTypeScriptのプロジェクト内で扱えるようにする
     "allowJs": true,
     // ライブラリの型チェックをスキップ（ビルド速度の高速化）
@@ -38,20 +34,11 @@
     ],
     // パスエイリアス設定
     "paths": {
-      "@/*": [
-        "./src/*"
-      ]
+      "@/*": ["./src/*"]
     }
   },
   // 型チェックの対象とするファイル
-  "include": [
-    ".next/types/**/*.ts",
-    "next-env.d.ts",
-    "**/*.ts",
-    "**/*.tsx"
-  ],
+  "include": [".next/types/**/*.ts", "next-env.d.ts", "**/*.ts", "**/*.tsx"],
   // 除外するファイル（`node_modules` は型チェックしない）
-  "exclude": [
-    "node_modules"
-  ]
+  "exclude": ["node_modules"]
 }

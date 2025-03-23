@@ -10,7 +10,7 @@ const nextConfig = {
       {
         // トップページは記事一覧ページにリダイレクト
         source: '/',
-        destination: '/stocks',
+        destination: '/articles',
         permanent: true,
       },
     ]

@@ -1,6 +1,6 @@
 import type { Meta, StoryObj } from '@storybook/react'
 
-import NotificationMessage from '@/app/components/basic/NotificationMessage'
+import NotificationMessage from '@/components/basic/NotificationMessage'
 
 const meta = {
   title: 'Basic/NotificationMessage',

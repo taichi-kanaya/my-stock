@@ -1,6 +1,6 @@
-import '@/app/styles/tailwind.scss'
-import { INITIAL_VIEWPORTS } from '@storybook/addon-viewport'
+import '@/styles/tailwind.scss'
 
+import { INITIAL_VIEWPORTS } from '@storybook/addon-viewport'
 import type { Preview } from '@storybook/react'
 
 const preview: Preview = {

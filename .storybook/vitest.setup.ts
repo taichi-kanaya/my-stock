@@ -1,5 +1,6 @@
-import { beforeAll } from 'vitest'
 import { setProjectAnnotations } from '@storybook/experimental-nextjs-vite'
+import { beforeAll } from 'vitest'
+
 import * as projectAnnotations from './preview'
 
 // Storybookの設定をVitestでも適用する

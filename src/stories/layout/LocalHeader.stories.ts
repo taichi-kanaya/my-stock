@@ -1,6 +1,6 @@
 import type { Meta, StoryObj } from '@storybook/react'
 
-import LocalHeader from '@/app/components/layout/LocalHeader'
+import LocalHeader from '@/components/layout/LocalHeader'
 
 const meta = {
   title: 'Layout/LocalHeader',

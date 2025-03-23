@@ -1,7 +1,8 @@
 'use client'
 
 import { useEffect } from 'react'
-import Link from '@/app/components/basic/Link'
+
+import Link from '@/components/basic/Link'
 
 export default function Error({ error }: { error: Error & { digest?: string } }) {
   useEffect(() => {
@@ -15,7 +16,7 @@ export default function Error({ error }: { error: Error & { digest?: string } })
         恐れ入りますが、再度操作をお願いいたします。
       </h1>
       <div className="my-5">
-       <Link href="/">トップへ戻る</Link>
+        <Link href="/">トップへ戻る</Link>
       </div>
     </div>
   )

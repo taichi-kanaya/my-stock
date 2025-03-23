@@ -1,6 +1,5 @@
-import { mergeConfig } from 'vite'
-
 import type { StorybookConfig } from '@storybook/experimental-nextjs-vite'
+import { mergeConfig } from 'vite'
 
 const config: StorybookConfig = {
   // Storybookが読み込むストーリーファイルを設定

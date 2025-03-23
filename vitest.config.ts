@@ -1,7 +1,8 @@
 import path from 'node:path'
-import { defineConfig } from 'vitest/config'
 import { fileURLToPath } from 'node:url'
+
 import { storybookTest } from '@storybook/experimental-addon-test/vitest-plugin'
+import { defineConfig } from 'vitest/config'
 
 const dirname = path.dirname(fileURLToPath(import.meta.url))
 export default defineConfig({
@@ -9,7 +10,7 @@ export default defineConfig({
     // StoryをテストするためのVitestプラグイン
     storybookTest({
       // Storybookの設定ファイル（.storybookフォルダ）を指定
-      configDir: path.join(dirname, '.storybook')
+      configDir: path.join(dirname, '.storybook'),
     }),
   ],
   test: {

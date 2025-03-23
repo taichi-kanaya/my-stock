@@ -1,9 +1,13 @@
-import type { Metadata } from 'next'
 import { ReactNode } from 'react'
-import '@/app/styles/tailwind.scss'
-import '@/app/styles/global.scss'
-import Header from './components/layout/Header'
-import Footer from './components/layout/Footer'
+
+import type { Metadata } from 'next'
+
+import '@/styles/tailwind.scss'
+import '@/styles/global.scss'
+
+import Footer from '../components/layout/Footer'
+import Header from '../components/layout/Header'
+
 export const metadata: Metadata = {
   title: 'My Stocks',
 }
