@@ -14,11 +14,10 @@ import NotificationMessage from '@/components/basic/NotificationMessage'
 import TextArea from '@/components/basic/TextArea'
 import TextInput from '@/components/basic/TextInput'
 import ValidationErrorMessage from '@/components/basic/ValidationErrorMessage'
-import { ARTICLE_MAX_LENGTHS } from '@/constants/validation'
+import { updateContents } from '@/features/articles/actions/updateContents'
 import useArticleForm from '@/features/articles/hooks/useArticleForm'
 import { ArticleFormData } from '@/features/articles/types'
-
-import { updateContents } from '../actions/updateContents'
+import { MAX_LENGTHS, VIEWS } from '@/features/articles/validations/schema'
 
 type EditFormProps = {
   entryId: string
@@ -33,12 +32,18 @@ const EditForm: React.FC<EditFormProps> = ({ entryId, id, title, body, publicAt,
   // 記事登録
   const onSubmit: SubmitHandler<ArticleFormData> = async (data: ArticleFormData) => {
     setMessage('')
-    const isSuccess = await updateContents(data)
-    setIsSuccess(isSuccess)
-    if (isSuccess) {
+    const result = await updateContents(data)
+    setIsSuccess(result.isSuccess)
+    if (result.isSuccess) {
       setMessage('記事の更新が完了しました。')
     } else {
-      setMessage('記事の更新に失敗しました。恐れ入りますが、時間を空けてもう１度お試しください。')
+      setMessage(
+        result.fieldErrors
+          ? Object.entries(result.fieldErrors)
+              .map(([field, message]) => `${field}：${message}`)
+              .join('\n')
+          : '記事の更新に失敗しました。恐れ入りますが、時間を空けてもう１度お試しください。',
+      )
     }
   }
 
@@ -74,22 +79,17 @@ const EditForm: React.FC<EditFormProps> = ({ entryId, id, title, body, publicAt,
           <Label isRequire={true} htmlFor="title">
             タイトル
           </Label>
-          <TextInput id="title" maxLength={ARTICLE_MAX_LENGTHS.TITLE} {...register('title')} />
+          <TextInput id="title" maxLength={MAX_LENGTHS.TITLE} {...register('title')} />
           <ValidationErrorMessage>{errors.title?.message}</ValidationErrorMessage>
         </div>
         <div className="flex flex-col">
           <Label isRequire={true} htmlFor="body">
             本文
           </Label>
-          <TextArea
-            id="body"
-            rows={10}
-            maxLength={ARTICLE_MAX_LENGTHS.BODY}
-            {...register('body')}
-          />
+          <TextArea id="body" rows={10} maxLength={MAX_LENGTHS.BODY} {...register('body')} />
           <ValidationErrorMessage>{errors.body?.message}</ValidationErrorMessage>
         </div>
-        <div className="flex max-w-[200px] flex-col">
+        <div className="flex flex-col">
           <Label isRequire={true} htmlFor="publicAt">
             公開日
           </Label>
@@ -113,7 +113,7 @@ const EditForm: React.FC<EditFormProps> = ({ entryId, id, title, body, publicAt,
           <Label isRequire={true} htmlFor="views">
             閲覧数
           </Label>
-          <TextInput id="views" maxLength={ARTICLE_MAX_LENGTHS.VIEWS} {...register('views')} />
+          <TextInput id="views" maxLength={String(VIEWS.MAX).length} {...register('views')} />
           <ValidationErrorMessage>{errors.views?.message}</ValidationErrorMessage>
         </div>
         <div className="space-x-4">

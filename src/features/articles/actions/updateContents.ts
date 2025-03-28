@@ -3,9 +3,33 @@
 import * as contentful from 'contentful-management'
 
 import { ArticleFormData } from '@/features/articles/types'
+import schema from '@/features/articles/validations/schema'
 
-export async function updateContents(data: ArticleFormData): Promise<boolean> {
+export type UpdateContentsResult =
+  | { isSuccess: true }
+  | {
+      isSuccess: false
+      fieldErrors?: Partial<Record<keyof ArticleFormData, string>>
+    }
+
+export async function updateContents(data: ArticleFormData): Promise<UpdateContentsResult> {
   try {
+    const parseResult = schema.safeParse(data)
+    if (!parseResult.success) {
+      const zodErrors = parseResult.error.flatten().fieldErrors
+      const fieldErrors: Partial<Record<keyof ArticleFormData, string>> = {}
+
+      for (const key in zodErrors) {
+        const field = key as keyof ArticleFormData
+        fieldErrors[field] = zodErrors[field]?.[0] || '不正な値です'
+      }
+
+      return {
+        isSuccess: false,
+        fieldErrors,
+      }
+    }
+
     // Contentfulの環境情報を取得する
     const client = contentful.createClient({
       accessToken: process.env.CMA_ACCESS_TOKEN!,
@@ -26,11 +50,10 @@ export async function updateContents(data: ArticleFormData): Promise<boolean> {
     // エントリー公開
     await updatedEntry.publish()
 
-    // eslint-disable-next-line no-console
-    console.log('Content updated successfully:', cfEntry)
-    return true
+    console.info('Content updated successfully:', cfEntry)
+    return { isSuccess: true }
   } catch (error) {
     console.error('Error updating content:', error)
-    return false
+    return { isSuccess: false }
   }
 }
