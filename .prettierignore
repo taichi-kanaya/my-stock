@@ -1,0 +1,27 @@
+# パッケージ関連
+node_modules
+
+# Next.jsのビルドフォルダ
+.next
+
+# Next.jsの静的ファイル書き出し先（next export）
+out
+
+# Storybookの静的ファイル書き出し先
+storybook-static
+
+# ビルド出力先
+dist
+
+# 環境変数ファイル
+*.env.*
+
+# ログファイル
+*.log
+
+# VSCode / JetBrains の設定ファイル
+.vscode/
+.idea/
+
+# Git管理外のファイル
+.git/

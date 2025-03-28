@@ -1,0 +1,44 @@
+{
+  "compilerOptions": {
+    // ブラウザが解釈するECMAScriptのバージョン
+    "target": "es2020",
+    // TypeScriptが利用するライブラリを指定
+    "lib": ["dom", "dom.iterable", "esnext"],
+    // JSファイルもTypeScriptのプロジェクト内で扱えるようにする
+    "allowJs": true,
+    // ライブラリの型チェックをスキップ（ビルド速度の高速化）
+    "skipLibCheck": true,
+    // 厳格な型チェックを有効化
+    "strict": true,
+    // .jsや.d.tsの出力を無効化（Next.jsはtscではなくBabelを利用するため）
+    "noEmit": true,
+    // CommonJS（require）と ESM（import）の互換性を確保
+    "esModuleInterop": true,
+    // モジュール出力形式（ブラウザではなくバンドラーの解釈用）
+    "module": "esnext",
+    // 使用モジュールの解決方法
+    "moduleResolution": "bundler",
+    // JSONファイルをTypeScriptでインポートできるようにする
+    "resolveJsonModule": true,
+    // 各ファイルを独立してコンパイルする（Babelによるトランスパイルを考慮）
+    "isolatedModules": true,
+    // JSXを変換せずに残す（TypeScriptではなくBabelが処理するため）
+    "jsx": "preserve",
+    // 増分コンパイルを有効（型チェックを高速化）
+    "incremental": true,
+    // Next.js用のTypeScript設定プラグイン
+    "plugins": [
+      {
+        "name": "next"
+      }
+    ],
+    // パスエイリアス設定
+    "paths": {
+      "@/*": ["./src/*"]
+    }
+  },
+  // 型チェックの対象とするファイル
+  "include": [".next/types/**/*.ts", "next-env.d.ts", "**/*.ts", "**/*.tsx"],
+  // 除外するファイル（`node_modules` は型チェックしない）
+  "exclude": ["node_modules"]
+}
