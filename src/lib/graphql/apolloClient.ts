@@ -3,13 +3,11 @@ import { print } from 'graphql/language/printer'
 
 // GraphQLリクエストとレスポンスをコンソール出力するためのリンク
 const consoleLogLink = new ApolloLink((operation, forward) => {
-  // eslint-disable-next-line no-console
   console.info(
     `GraphQL Request: ${print(operation.query)}`,
     `Variables: ${JSON.stringify(operation.variables)}`,
   )
   return forward(operation).map((response) => {
-    // eslint-disable-next-line no-console
     console.info(`GraphQL Response: ${operation.operationName}`, JSON.stringify(response.data))
     return response
   })

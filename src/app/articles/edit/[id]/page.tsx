@@ -2,7 +2,7 @@ import { format } from 'date-fns'
 
 import Loading from '@/app/loading'
 import getSingleArticle from '@/features/articles/actions/getSingleArticle'
-import EditForm from '@/features/articles/pages/EditForm'
+import EditForm from '@/features/articles/components/EditForm'
 
 export default async function Page({ params }: { params: { id: string } }) {
   const { loading, error, data } = await getSingleArticle(parseInt(params.id))
@@ -22,15 +22,13 @@ export default async function Page({ params }: { params: { id: string } }) {
   const articleBody = article.body.json.content[0].content[0].value as string
 
   return (
-    <>
-      <EditForm
-        entryId={String(article.sys.id)}
-        id={String(article.id)}
-        title={String(article.title)}
-        body={articleBody}
-        publicAt={formattedDate}
-        views={String(article.views)}
-      />
-    </>
+    <EditForm
+      entryId={String(article.sys.id)}
+      id={String(article.id)}
+      title={String(article.title)}
+      body={articleBody}
+      publicAt={formattedDate}
+      views={String(article.views)}
+    />
   )
 }

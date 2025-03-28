@@ -44,6 +44,6 @@ module.exports = {
     // 型アサーション (as) を乱用しない
     '@typescript-eslint/no-unnecessary-type-assertion': 'warn',
     // console.logを警告
-    'no-console': ['warn', { allow: ['warn', 'error'] }],
+    'no-console': ['warn', { allow: ['info', 'warn', 'error'] }],
   },
 }

@@ -1,7 +1,7 @@
 'use server'
 
-import { contentfulClient } from '@/lib/apolloClient'
-import { GET_ALL_ARTICLES } from '@/lib/graphql/queries'
+import { contentfulClient } from '@/lib/graphql/apolloClient'
+import { GET_ALL_ARTICLES } from '@/lib/graphql/queries/articles'
 
 export default async function getAllArticles() {
   const { loading, error, data } = await contentfulClient.query({

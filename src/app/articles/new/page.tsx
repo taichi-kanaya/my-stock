@@ -1,9 +1,5 @@
-import NewForm from '@/features/articles/pages/NewForm'
+import NewForm from '@/features/articles/components/NewForm'
 
 export default function Form() {
-  return (
-    <>
-      <NewForm />
-    </>
-  )
+  return <NewForm />
 }
