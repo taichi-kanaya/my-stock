@@ -1,9 +1,8 @@
 'use server'
 
-import * as contentful from 'contentful-management'
-
 import { ArticleFormData } from '@/features/articles/types'
 import schema from '@/features/articles/validations/schema'
+import getCMAEnv from '@/lib/getCMAEnv'
 
 export type RegisterContentsResult =
   | { isSuccess: true }
@@ -31,14 +30,10 @@ export async function registerContents(data: ArticleFormData): Promise<RegisterC
     }
 
     // Contentfulの環境情報を取得する
-    const client = contentful.createClient({
-      accessToken: process.env.CMA_ACCESS_TOKEN!,
-    })
-    const cfSpace = await client.getSpace(process.env.CONTENTFUL_SPACE_ID!)
-    const cfEnvironment = await cfSpace.getEnvironment(process.env.CONTENTFUL_ENVIRONMENT_ID!)
+    const env = await getCMAEnv()
 
     // Contentfulにコンテンツを登録する
-    const cfEntry = await cfEnvironment.createEntry(process.env.CONTENTFUL_CONTENT_TYPE_ID!, {
+    const entry = await env.createEntry(process.env.CONTENTFUL_CONTENT_TYPE_ID!, {
       fields: {
         id: {
           'ja-JP': Number(data.id),
@@ -76,9 +71,9 @@ export async function registerContents(data: ArticleFormData): Promise<RegisterC
     })
 
     // 記事を公開する
-    await cfEntry.publish()
+    await entry.publish()
 
-    console.info('Content registered successfully:', cfEntry)
+    console.info('Content registered successfully:', entry)
     return { isSuccess: true }
   } catch (error) {
     console.error('Error registering content:', error)

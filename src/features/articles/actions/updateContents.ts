@@ -1,9 +1,8 @@
 'use server'
 
-import * as contentful from 'contentful-management'
-
 import { ArticleFormData } from '@/features/articles/types'
 import schema from '@/features/articles/validations/schema'
+import getCMAEnv from '@/lib/getCMAEnv'
 
 export type UpdateContentsResult =
   | { isSuccess: true }
@@ -31,26 +30,22 @@ export async function updateContents(data: ArticleFormData): Promise<UpdateConte
     }
 
     // Contentfulの環境情報を取得する
-    const client = contentful.createClient({
-      accessToken: process.env.CMA_ACCESS_TOKEN!,
-    })
-    const cfSpace = await client.getSpace(process.env.CONTENTFUL_SPACE_ID!)
-    const cfEnvironment = await cfSpace.getEnvironment(process.env.CONTENTFUL_ENVIRONMENT_ID!)
+    const env = await getCMAEnv()
 
     // 既存エントリーを取得
-    const cfEntry = await cfEnvironment.getEntry(data.entryId)
+    const entry = await env.getEntry(data.entryId)
 
     // エントリー更新
-    cfEntry.fields.title['ja-JP'] = data.title
-    cfEntry.fields.body['ja-JP'].content[0].content[0].value = data.body
-    cfEntry.fields.public_at['ja-JP'] = data.publicAt
-    cfEntry.fields.views['ja-JP'] = Number(data.views)
-    const updatedEntry = await cfEntry.update()
+    entry.fields.title['ja-JP'] = data.title
+    entry.fields.body['ja-JP'].content[0].content[0].value = data.body
+    entry.fields.public_at['ja-JP'] = data.publicAt
+    entry.fields.views['ja-JP'] = Number(data.views)
+    const updatedEntry = await entry.update()
 
     // エントリー公開
     await updatedEntry.publish()
 
-    console.info('Content updated successfully:', cfEntry)
+    console.info('Content updated successfully:', entry)
     return { isSuccess: true }
   } catch (error) {
     console.error('Error updating content:', error)
