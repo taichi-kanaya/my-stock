@@ -3,6 +3,7 @@
 import { useState } from 'react'
 
 import { parse } from 'date-fns'
+import { useRouter } from 'next/navigation'
 import { Controller, SubmitHandler, useFormState } from 'react-hook-form'
 
 import Button from '@/components/basic/Button'
@@ -14,6 +15,7 @@ import NotificationMessage from '@/components/basic/NotificationMessage'
 import TextArea from '@/components/basic/TextArea'
 import TextInput from '@/components/basic/TextInput'
 import ValidationErrorMessage from '@/components/basic/ValidationErrorMessage'
+import { useCursorWait } from '@/components/provider/CursorWaitProvider'
 import { updateContents } from '@/features/articles/actions/updateContents'
 import useArticleForm from '@/features/articles/hooks/useArticleForm'
 import { ArticleFormData } from '@/features/articles/types'
@@ -29,21 +31,30 @@ type EditFormProps = {
 }
 
 const EditForm: React.FC<EditFormProps> = ({ entryId, id, title, body, publicAt, views }) => {
+  const { setWait, isWaiting } = useCursorWait()
+  const router = useRouter()
+
   // 記事登録
   const onSubmit: SubmitHandler<ArticleFormData> = async (data: ArticleFormData) => {
     setMessage('')
-    const result = await updateContents(data)
-    setIsSuccess(result.isSuccess)
-    if (result.isSuccess) {
-      setMessage('記事の更新が完了しました。')
-    } else {
-      setMessage(
-        result.fieldErrors
-          ? Object.entries(result.fieldErrors)
-              .map(([field, message]) => `${field}：${message}`)
-              .join('\n')
-          : '記事の更新に失敗しました。恐れ入りますが、時間を空けてもう１度お試しください。',
-      )
+
+    try {
+      setWait(true)
+      const result = await updateContents(data)
+      setIsSuccess(result.isSuccess)
+      if (result.isSuccess) {
+        router.push('/articles/complete?event=update')
+      } else {
+        setMessage(
+          result.fieldErrors
+            ? Object.entries(result.fieldErrors)
+                .map(([field, message]) => `${field}：${message}`)
+                .join('\n')
+            : '記事の更新に失敗しました。恐れ入りますが、時間を空けてもう１度お試しください。',
+        )
+      }
+    } finally {
+      setWait(false)
     }
   }
 
@@ -117,7 +128,7 @@ const EditForm: React.FC<EditFormProps> = ({ entryId, id, title, body, publicAt,
           <ValidationErrorMessage>{errors.views?.message}</ValidationErrorMessage>
         </div>
         <div className="space-x-4">
-          <Button isPrimary={true} type="submit">
+          <Button isPrimary={true} type="submit" disabled={isWaiting}>
             更新する
           </Button>
           <Link href="/">トップへ戻る</Link>

@@ -3,6 +3,9 @@ import Button from '@/components/basic/Button'
 import ArticleCard from '@/components/layout/ArticleCard'
 import getAllArticles from '@/features/articles/actions/getAllArticles'
 
+// キャッシュは利用しない
+export const dynamic = 'force-dynamic'
+
 export default async function Page() {
   // 記事を全て取得する
   const { loading, error, data } = await getAllArticles()
