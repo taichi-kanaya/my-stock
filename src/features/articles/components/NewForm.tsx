@@ -13,29 +13,37 @@ import NotificationMessage from '@/components/basic/NotificationMessage'
 import TextArea from '@/components/basic/TextArea'
 import TextInput from '@/components/basic/TextInput'
 import ValidationErrorMessage from '@/components/basic/ValidationErrorMessage'
+import { useCursorWait } from '@/components/provider/CursorWaitProvider'
 import { registerContents } from '@/features/articles/actions/registerContents'
 import useArticleForm from '@/features/articles/hooks/useArticleForm'
 import { ArticleFormData } from '@/features/articles/types'
 import { ID, MAX_LENGTHS, VIEWS } from '@/features/articles/validations/schema'
 
 const NewForm: React.FC = () => {
+  const { setWait, isWaiting } = useCursorWait()
   const router = useRouter()
 
   // 記事登録
   const onSubmit: SubmitHandler<ArticleFormData> = async (data: ArticleFormData) => {
     setMessage('')
-    const result = await registerContents(data)
-    setIsSuccess(result.isSuccess)
-    if (result.isSuccess) {
-      router.push('/articles/complete?event=register')
-    } else {
-      setMessage(
-        result.fieldErrors
-          ? Object.entries(result.fieldErrors)
-              .map(([field, message]) => `${field}：${message}`)
-              .join('\n')
-          : '記事の登録に失敗しました。恐れ入りますが、時間を空けてもう１度お試しください。',
-      )
+
+    try {
+      setWait(true)
+      const result = await registerContents(data)
+      setIsSuccess(result.isSuccess)
+      if (result.isSuccess) {
+        router.push('/articles/complete?event=register')
+      } else {
+        setMessage(
+          result.fieldErrors
+            ? Object.entries(result.fieldErrors)
+                .map(([field, message]) => `${field}：${message}`)
+                .join('\n')
+            : '記事の登録に失敗しました。恐れ入りますが、時間を空けてもう１度お試しください。',
+        )
+      }
+    } finally {
+      setWait(false)
     }
   }
 
@@ -100,7 +108,7 @@ const NewForm: React.FC = () => {
           <ValidationErrorMessage>{formState.errors.views?.message}</ValidationErrorMessage>
         </div>
         <div className="space-x-4">
-          <Button isPrimary={true} type="submit">
+          <Button isPrimary={true} type="submit" disabled={isWaiting}>
             登録する
           </Button>
           <Link href="/">トップへ戻る</Link>
