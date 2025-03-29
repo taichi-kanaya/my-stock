@@ -7,6 +7,7 @@ import '@/styles/global.scss'
 
 import Footer from '@/components/layout/Footer'
 import Header from '@/components/layout/Header'
+import { CursorWaitProvider } from '@/components/provider/CursorWaitProvider'
 
 export const metadata: Metadata = {
   title: 'My Stocks',
@@ -17,9 +18,11 @@ export default function RootLayout({ children }: { children: ReactNode }) {
     <html lang="ja">
       <body>
         <Header isAuthenticated={false} loginUserName="" />
-        <main>
-          <div className="container mx-auto p-4">{children}</div>
-        </main>
+        <CursorWaitProvider>
+          <main>
+            <div className="container mx-auto p-4">{children}</div>
+          </main>
+        </CursorWaitProvider>
         <Footer />
       </body>
     </html>

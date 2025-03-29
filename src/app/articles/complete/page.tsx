@@ -4,12 +4,13 @@ export default async function Page({
   searchParams,
 }: {
   searchParams: {
-    event: 'register' | 'update'
+    event: 'register' | 'update' | 'delete'
   }
 }) {
   const eventMessageMap = {
     register: '記事の登録が完了しました',
     update: '記事の更新が完了しました',
+    delete: '記事の削除が完了しました',
   } as const
 
   return (
