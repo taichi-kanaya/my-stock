@@ -15,7 +15,6 @@
     "@apollo/client": "^3.8.8",
     "@hookform/resolvers": "^3.3.4",
     "@types/react-datepicker": "^4.19.6",
-    "axios": "^1.6.7",
     "contentful-management": "^11.25.2",
     "date-fns": "^3.3.1",
     "graphql": "^16.8.1",
@@ -26,7 +25,6 @@
     "react-dom": "^18",
     "react-hook-form": "^7.51.3",
     "sass": "^1.75.0",
-    "yup": "^1.4.0",
     "zod": "^3.24.2"
   },
   "devDependencies": {
