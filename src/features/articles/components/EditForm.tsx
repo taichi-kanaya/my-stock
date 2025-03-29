@@ -3,6 +3,7 @@
 import { useState } from 'react'
 
 import { parse } from 'date-fns'
+import { useRouter } from 'next/navigation'
 import { Controller, SubmitHandler, useFormState } from 'react-hook-form'
 
 import Button from '@/components/basic/Button'
@@ -29,13 +30,15 @@ type EditFormProps = {
 }
 
 const EditForm: React.FC<EditFormProps> = ({ entryId, id, title, body, publicAt, views }) => {
+  const router = useRouter()
+
   // 記事登録
   const onSubmit: SubmitHandler<ArticleFormData> = async (data: ArticleFormData) => {
     setMessage('')
     const result = await updateContents(data)
     setIsSuccess(result.isSuccess)
     if (result.isSuccess) {
-      setMessage('記事の更新が完了しました。')
+      router.push('/articles/complete?event=update')
     } else {
       setMessage(
         result.fieldErrors

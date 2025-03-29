@@ -2,6 +2,7 @@
 
 import { useState } from 'react'
 
+import { useRouter } from 'next/navigation'
 import { Controller, SubmitHandler } from 'react-hook-form'
 
 import Button from '@/components/basic/Button'
@@ -18,13 +19,15 @@ import { ArticleFormData } from '@/features/articles/types'
 import { ID, MAX_LENGTHS, VIEWS } from '@/features/articles/validations/schema'
 
 const NewForm: React.FC = () => {
+  const router = useRouter()
+
   // 記事登録
   const onSubmit: SubmitHandler<ArticleFormData> = async (data: ArticleFormData) => {
     setMessage('')
     const result = await registerContents(data)
     setIsSuccess(result.isSuccess)
     if (result.isSuccess) {
-      setMessage('記事の登録が完了しました。')
+      router.push('/articles/complete?event=register')
     } else {
       setMessage(
         result.fieldErrors
