@@ -17,6 +17,8 @@ type Story = StoryObj<typeof meta>
 export const NotSignin: Story = {
   args: {
     isAuthenticated: false,
+    onSignIn: () => alert('Signed in successfully'),
+    onSignOut: () => alert('Signed out successfully'),
   },
 }
 
@@ -24,5 +26,7 @@ export const SignedIn: Story = {
   args: {
     isAuthenticated: true,
     loginUserName: 'Taichi Kanaya',
+    onSignIn: () => alert('Signed in successfully'),
+    onSignOut: () => alert('Signed out successfully'),
   },
 }

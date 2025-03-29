@@ -1,11 +1,15 @@
 import Link from 'next/link'
 
+import OriginalLink from '@/components/basic/Link'
+
 type HeaderProps = {
   isAuthenticated: boolean
   loginUserName?: string
+  onSignIn: () => void
+  onSignOut: () => void
 }
 
-const Header: React.FC<HeaderProps> = ({ isAuthenticated, loginUserName }) => {
+const Header: React.FC<HeaderProps> = ({ isAuthenticated, loginUserName, onSignIn, onSignOut }) => {
   return (
     <header className="bg-gray-800 text-white">
       <nav className="container mx-auto flex justify-between p-4">
@@ -18,14 +22,16 @@ const Header: React.FC<HeaderProps> = ({ isAuthenticated, loginUserName }) => {
           {isAuthenticated ? (
             <div>
               <label className="mr-10">Hello, {loginUserName}</label>
-              <Link className="hover:text-gray-300" href="/signout">
+              <OriginalLink href="#" onClick={onSignOut}>
                 Sign out
-              </Link>
+              </OriginalLink>
             </div>
           ) : (
-            <Link className="hover:text-gray-300" href="/signin">
-              Sign in
-            </Link>
+            <div>
+              <OriginalLink href="#" onClick={onSignIn}>
+                Sign in
+              </OriginalLink>
+            </div>
           )}
         </div>
       </nav>
