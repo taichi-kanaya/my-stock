@@ -21,7 +21,7 @@ const Button: React.FC<ButtonProps> = ({
 }) => {
   const primaryClasses = 'bg-blue-500 hover:bg-blue-700'
   const secondaryClasses = 'bg-red-500 hover:bg-red-700'
-  const buttonClass = clsx(className, className, isPrimary ? primaryClasses : secondaryClasses)
+  const buttonClass = clsx(className, isPrimary ? primaryClasses : secondaryClasses)
 
   if (type === 'submit') {
     return (
